@@ -1,30 +1,47 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <main-layout :loading="isAppLoading">
+    <template #navigation>
+      <navigation-menu
+        :selected-item="selectedValue"
+        :menu="menuOptions"
+        @update:navigation="handleNavigationUpdates"
+      />
+    </template>
+    <router-view />
+  </main-layout>
 </template>
 
-<style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script lang="ts">
+import { defineComponent, onMounted, ref } from 'vue'
+import MainLayout from '@/components/MainLayout.vue'
+import NavigationMenu from '@/components/NavigationMenu.vue'
+import { useNavigationMenu } from '@/hooks/useNavigationMenu'
+import { useCurrency } from './hooks/useCurrency'
 
-nav {
-  padding: 30px;
+export default defineComponent({
+  name: 'AppMain',
+  components: {
+    MainLayout,
+    NavigationMenu
+  },
+  setup () {
+    const { initialiseAppCurrencyData } = useCurrency()
+    const { selectedValue, menuOptions, handleNavigationUpdates } = useNavigationMenu()
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+    const isAppLoading = ref<boolean>(true)
 
-    &.router-link-exact-active {
-      color: #42b983;
+    onMounted(() => {
+      initialiseAppCurrencyData().finally(() => {
+        isAppLoading.value = false
+      })
+    })
+
+    return {
+      selectedValue,
+      menuOptions,
+      handleNavigationUpdates,
+      isAppLoading
     }
   }
-}
-</style>
+})
+</script>
