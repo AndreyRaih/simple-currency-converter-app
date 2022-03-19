@@ -2,7 +2,7 @@
   <template v-if="data">
     <n-h2 prefix="bar">{{ data.baseAmount }} {{ data.baseCurrency }} = {{ data.targetAmount }} {{ data.targetCurrency }}</n-h2>
     <n-p>1 {{ data.baseCurrencyCode }} = {{ data.rate }} {{ data.targetCurrencyCode }}</n-p>
-    <n-text :depth="3">{{ data.baseCurrency }} to {{ data.targetCurrency }} conversion — last updated: {{ data.updatedOn }}</n-text>
+    <n-text :depth="3">{{ data.baseCurrency }} to {{ data.targetCurrency }} conversion — actual on: {{ data.updatedOn }}</n-text>
     </template>
 </template>
 

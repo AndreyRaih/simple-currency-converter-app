@@ -12,6 +12,7 @@
         <n-spin size="large" />
       </div>
     </n-card>
+    <n-text :depth="3">Powered by <n-a href="https://www.naiveui.com/en-US/os-theme" target="_blank">Naive UI</n-a> and <n-a href="https://rapidapi.com/user/principalapis" target="_blank">Principal APIs</n-a></n-text>
   </main>
 </template>
 
@@ -35,7 +36,8 @@
 }
 
 .Card {
-  width: 75%
+  width: 75%;
+  margin-bottom: 16px;
 }
 
 .SpinnerWrapper {
@@ -47,7 +49,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { NCard, NGradientText, NSpin } from 'naive-ui'
+import { NCard, NGradientText, NSpin, NText, NA } from 'naive-ui'
 
 export default defineComponent({
   name: 'MainLayout',
@@ -60,7 +62,9 @@ export default defineComponent({
   components: {
     NCard,
     NSpin,
-    NGradientText
+    NGradientText,
+    NText,
+    NA
   }
 })
 </script>

@@ -96,8 +96,7 @@ import { defineComponent, PropType } from 'vue'
 import { NFormItem, NInputNumber, NButton, NIcon } from 'naive-ui'
 import { ArrowsHorizontal as ReplaceIcon } from '@vicons/carbon'
 import type { SelectOption } from 'naive-ui'
-import CurrencySelect from '@/components/shared/CurrencySelect.vue'
-import { currencyFieldLabelStyle } from '@/components/shared/constants'
+import CurrencySelect, { currencyFieldLabelStyle } from '@/components/shared/CurrencySelect.vue'
 
 export default defineComponent({
   name: 'ConverterAmountForm',

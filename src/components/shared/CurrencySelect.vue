@@ -5,6 +5,7 @@
       :options="options"
       :value="value"
       :render-label="renderLabelWithSymbol"
+      :filterable="true"
       @update:value="(value) => $emit('update:value', value)"
     />
   </n-form-item>
@@ -14,7 +15,11 @@
 import { defineComponent, PropType, h } from 'vue'
 import { NFormItem, NSelect, NText } from 'naive-ui'
 import type { SelectOption } from 'naive-ui'
-import { currencyFieldLabelStyle } from './constants'
+
+export const currencyFieldLabelStyle = {
+  fontSize: '18px',
+  fontWeight: 600
+}
 
 export default defineComponent({
   name: 'CurrencySelect',

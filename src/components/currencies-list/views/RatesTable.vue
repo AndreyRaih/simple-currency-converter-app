@@ -37,6 +37,7 @@ export default defineComponent({
     const columns = computed(() => [
       {
         title: 'Currency',
+        sorter: (row1: RatesDataTableItem, row2: RatesDataTableItem) => (row1.currency as string).localeCompare(row2.currency as string),
         key: 'currency'
       },
       {
