@@ -3,13 +3,19 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'converter',
-    component: () => import('../pages/ConverterPage.vue')
-  },
-  {
-    path: '/list',
-    name: 'currencies-list',
-    component: () => import('../pages/CurrenciesListPage.vue')
+    component: () => import('@/pages/MainPage.vue'),
+    children: [
+      {
+        path: '',
+        name: 'converter',
+        component: () => import('@/pages/subpages/ConverterPage.vue')
+      },
+      {
+        path: 'list',
+        name: 'currencies-list',
+        component: () => import('@/pages/subpages/CurrenciesListPage.vue')
+      }
+    ]
   }
 ]
 
