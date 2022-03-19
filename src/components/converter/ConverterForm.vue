@@ -68,6 +68,13 @@ export default defineComponent({
     watch(() => converterFormData.value, () => emit('clear-result'), { deep: true })
 
     onBeforeMount(() => {
+      /**
+       * NOTE: Here we break the reactivity bindings. It has been done for 2 reasons:
+       * 1. Separate inner objects from outer, and avoid mutating source state
+       * 2. Stick to "Data - Down, Actions - Up" approach
+       * 
+       * Actually, if i got it right, for now there is no better way to handle similar cases
+       */
       converterFormData.value = { ...props.converterData }
     })
 

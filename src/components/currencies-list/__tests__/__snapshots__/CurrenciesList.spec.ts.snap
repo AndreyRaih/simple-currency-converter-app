@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CurrenciesList.vue Rendering should renders correctly 1`] = `
+<div
+  data-v-app=""
+>
+  
+  <currency-select-stub
+    label="Base currency"
+    options=""
+    placeholder="Select base currency"
+    value="USD"
+  />
+  <currencies-data-table-stub
+    basecurrencycode="USD"
+    list=""
+    loading="false"
+  />
+  
+</div>
+`;

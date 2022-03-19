@@ -3,7 +3,7 @@ import { ConversionQuery, ConversionResult } from '@/typings'
 import { createStore } from 'vuex'
 const CurrencyServiceInstance = new CurrencyService()
 
-export interface CurrencyState {
+interface CurrencyState {
   symbols: { [key: string]: string };
   conversionQuery: ConversionQuery;
   conversionResult: ConversionResult | null;
