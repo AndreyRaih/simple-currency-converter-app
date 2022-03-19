@@ -1,13 +1,9 @@
 export function useLocalStorage () {
-  function setData (key: string, data: any): void {
-    let storedData = data
-    if (typeof data === 'object') {
-      storedData = JSON.stringify(data)
-    }
-    localStorage.setItem(key, storedData)
+  function setData (key: string, data: string | number | boolean | object): void {
+    localStorage.setItem(key, (typeof data === 'object' ? JSON.stringify(data) : data.toString()))
   }
 
-  function getData (key: string): any {
+  function getData (key: string) {
     const restoredData = localStorage.getItem(key)
     return restoredData ? JSON.parse(restoredData) : null
   }

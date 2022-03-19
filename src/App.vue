@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue'
+import { defineComponent, onBeforeMount, ref } from 'vue'
 import MainLayout from '@/components/MainLayout.vue'
 import NavigationMenu from '@/components/NavigationMenu.vue'
 import { useNavigationMenu } from '@/hooks/useNavigationMenu'
@@ -30,7 +30,7 @@ export default defineComponent({
 
     const isAppLoading = ref<boolean>(true)
 
-    onMounted(() => {
+    onBeforeMount(() => {
       initialiseAppCurrencyData().finally(() => {
         isAppLoading.value = false
       })

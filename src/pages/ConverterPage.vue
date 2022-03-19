@@ -14,7 +14,7 @@ import { defineComponent, ref, computed } from 'vue'
 import ConverterForm from '@/components/converter/ConverterForm.vue'
 import { useCurrency } from '@/hooks/useCurrency'
 import { useFormatter } from '@/hooks/useFormatter'
-import { ConverterData } from '@/typings'
+import { ConversionQuery } from '@/typings'
 
 export default defineComponent({
   name: 'ConverterPage',
@@ -27,7 +27,7 @@ export default defineComponent({
 
     const symbolsOptions = computed(() => formatSymbolsToOptions(symbolsList.value))
     const convertingInProgress = ref<boolean>(false)
-    const handleConverting = async (converterFormData: ConverterData) => {
+    const handleConverting = async (converterFormData: ConversionQuery) => {
       convertingInProgress.value = true
       try {
         await convert(converterFormData)

@@ -1,13 +1,13 @@
-import { ConverterData } from '@/typings'
+import { ConversionQuery, CurrencyApi } from '@/typings'
 
-export default class CurrencyService {
+export default class CurrencyService implements CurrencyApi.I_Service_Instance {
   apiKey: string;
 
   constructor () {
     this.apiKey = ''
   }
 
-  convert (conversionQuery: ConverterData) {
+  convert (conversionQuery: ConversionQuery) {
     return Promise.resolve({
       date: '2021-03-15',
       info: {
@@ -37,7 +37,7 @@ export default class CurrencyService {
     })
   }
 
-  getRecentExchangeRatesByCurrency (currency: string) {
+  getRecentExchangeRatesByCurrency (currencyCode: string) {
     return Promise.resolve({
       base: 'USD',
       date: '2021-03-02',

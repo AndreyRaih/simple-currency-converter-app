@@ -19,7 +19,7 @@ import ConverterControlls from './views/Controlls.vue'
 import ConverterResult from './views/Result.vue'
 import { NCollapseTransition } from 'naive-ui'
 import type { SelectOption } from 'naive-ui'
-import type { ConverterResultData, ConverterData } from '@/typings.d'
+import type { ConversionResult, ConversionQuery } from '@/typings.d'
 
 export default defineComponent({
   name: 'ConverterView',
@@ -31,16 +31,16 @@ export default defineComponent({
   props: {
     converterData: {
       required: true,
-      type: Object as PropType<ConverterData>,
+      type: Object as PropType<ConversionQuery>,
       default: () => ({
-        from: null,
-        to: null,
+        from: '',
+        to: '',
         amount: 0
       })
     },
     converterResult: {
       required: true,
-      type: Object as PropType<ConverterResultData>,
+      type: Object as PropType<ConversionResult>,
       default: null
     },
     symbols: {
@@ -57,17 +57,21 @@ export default defineComponent({
     'clear-result'
   ],
   setup (props, { emit }) {
-    const converterFormData = ref()
+    const converterFormData = ref<ConversionQuery>({
+      from: '',
+      to: '',
+      amount: 0
+    })
+
+    const showResultView = computed(() => Boolean(props.converterResult && Object.keys(props.converterResult).length))
+
+    watch(() => converterFormData.value, () => emit('clear-result'), { deep: true })
 
     onBeforeMount(() => {
       converterFormData.value = { ...props.converterData }
     })
 
-    watch(() => converterFormData.value, () => emit('clear-result'), { deep: true })
-
     onBeforeUnmount(() => emit('clear-result'))
-
-    const showResultView = computed(() => Boolean(props.converterResult && Object.keys(props.converterResult).length))
 
     const handleSwitchCurrencies = () => {
       const prevTo = converterFormData.value.to

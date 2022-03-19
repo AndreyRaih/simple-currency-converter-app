@@ -113,17 +113,17 @@ export default defineComponent({
     amount: {
       type: Number || String,
       required: true,
-      default: null
+      default: 0
     },
     current: {
       type: String,
       required: true,
-      default: null
+      default: ''
     },
     target: {
       type: String,
       required: true,
-      default: null
+      default: ''
     },
     symbols: {
       type: Array as PropType<SelectOption[]>,

@@ -1,22 +1,22 @@
 <template>
   <template v-if="data">
-    <n-h2 prefix="bar">{{ data.selectedAmount }} {{ data.selectedCurrencyFullName }} = {{ data.convertedAmount }} {{ data.convertedCurrencyFullName }}</n-h2>
-    <n-p>1 {{ data.selectedCurrencyCode }} = {{ data.rate }} {{ data.convertedCurrencyCode }}</n-p>
-    <n-text :depth="3">{{ data.selectedCurrencyFullName }} to {{ data.convertedCurrencyFullName }} conversion — Last updated {{ data.lastUpdateDate }}</n-text>
+    <n-h2 prefix="bar">{{ data.baseAmount }} {{ data.baseCurrency }} = {{ data.targetAmount }} {{ data.targetCurrency }}</n-h2>
+    <n-p>1 {{ data.baseCurrencyCode }} = {{ data.rate }} {{ data.targetCurrencyCode }}</n-p>
+    <n-text :depth="3">{{ data.baseCurrency }} to {{ data.targetCurrency }} conversion — last updated: {{ data.updatedOn }}</n-text>
     </template>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import { NText, NP, NH2 } from 'naive-ui'
-import type { ConverterResultData } from '@/typings.d'
+import type { ConversionResult } from '@/typings.d'
 
 export default defineComponent({
   name: 'ConverterAmountResult',
   props: {
     data: {
       required: true,
-      type: Object as PropType<ConverterResultData>
+      type: Object as PropType<ConversionResult>
     }
   },
   components: {

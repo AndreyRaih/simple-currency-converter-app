@@ -1,12 +1,12 @@
 import CurrencyService from '@/services/CurrencyService'
-import { ConverterData, ConverterResultData } from '@/typings'
+import { ConversionQuery, ConversionResult } from '@/typings'
 import { createStore } from 'vuex'
 const CurrencyServiceInstance = new CurrencyService()
 
 export interface CurrencyState {
   symbols: { [key: string]: string };
-  conversionQuery: ConverterData;
-  conversionResult: ConverterResultData | null;
+  conversionQuery: ConversionQuery;
+  conversionResult: ConversionResult | null;
   rates: { [key: string]: number }
 }
 
@@ -33,10 +33,10 @@ export default createStore<CurrencyState>({
     CHANGE_CONVERSION_FROM (state, value: string): void {
       state.conversionQuery.from = value
     },
-    SET_CONVERSION_QUERY (state, queryObj: ConverterData): void {
+    SET_CONVERSION_QUERY (state, queryObj: ConversionQuery): void {
       state.conversionQuery = queryObj
     },
-    SET_CONVERSION_RESULT (state, result: ConverterResultData | null): void {
+    SET_CONVERSION_RESULT (state, result: ConversionResult | null): void {
       state.conversionResult = result
     },
     SET_RATES (state, rates: { [key: string]: number }): void {
@@ -53,15 +53,22 @@ export default createStore<CurrencyState>({
     convertByConversionQuery ({ commit, state }, converterFormData) {
       commit('SET_CONVERSION_QUERY', converterFormData)
       return CurrencyServiceInstance.convert(state.conversionQuery).then(conversion => commit('SET_CONVERSION_RESULT', {
-        selectedAmount: conversion.query.amount.toString(),
-        selectedCurrencyCode: conversion.query.from,
-        selectedCurrencyFullName: state.symbols[conversion.query.from],
-        convertedAmount: conversion.result.toString(),
-        convertedCurrencyCode: conversion.query.to,
-        convertedCurrencyFullName: state.symbols[conversion.query.to],
+        baseAmount: conversion.query.amount.toString(),
+        baseCurrencyCode: conversion.query.from,
+        baseCurrency: state.symbols[conversion.query.from],
+        targetAmount: conversion.result.toString(),
+        targetCurrencyCode: conversion.query.to,
+        targetCurrency: state.symbols[conversion.query.to],
         rate: conversion.info.rate,
-        lastUpdateDate: new Date(conversion.info.timestamp).toLocaleDateString()
-      } as ConverterResultData))
+        updatedOn: new Date(conversion.info.timestamp).toLocaleDateString('en-US', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          timeZone: 'UTC',
+          timeZoneName: 'short'
+        })
+      } as ConversionResult))
     }
   }
 })

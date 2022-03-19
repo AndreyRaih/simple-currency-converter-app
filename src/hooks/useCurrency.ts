@@ -1,5 +1,5 @@
 import { LOCAL_STORAGE_CURRENCY_QUERY_KEY } from '@/components/shared/constants'
-import { ConverterData } from '@/typings'
+import { ConversionQuery } from '@/typings'
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 import { useLocalStorage } from './useLocalStorage'
@@ -13,10 +13,10 @@ export function useCurrency () {
     if (savedConversionQuery) store.commit('SET_CONVERSION_QUERY', savedConversionQuery)
     return store.dispatch('getSymbols')
   }
-  const saveConversionQuery = (storedConversionQuery: ConverterData) => storage.setData(LOCAL_STORAGE_CURRENCY_QUERY_KEY, storedConversionQuery)
-  const restoreConversionQuery = (): ConverterData | null => storage.getData(LOCAL_STORAGE_CURRENCY_QUERY_KEY)
+  const saveConversionQuery = (storedConversionQuery: ConversionQuery) => storage.setData(LOCAL_STORAGE_CURRENCY_QUERY_KEY, storedConversionQuery)
+  const restoreConversionQuery = (): ConversionQuery | null => storage.getData(LOCAL_STORAGE_CURRENCY_QUERY_KEY)
 
-  const convert = (conversionQuery: ConverterData) => {
+  const convert = (conversionQuery: ConversionQuery) => {
     saveConversionQuery(conversionQuery)
     return store.dispatch('convertByConversionQuery', conversionQuery)
   }
