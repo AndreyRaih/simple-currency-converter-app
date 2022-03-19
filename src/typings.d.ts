@@ -1,4 +1,5 @@
-import { namespace } from "naive-ui/lib/_utils/cssr";
+import { AxiosInstance } from 'axios'
+import { MessageApiInjection } from 'naive-ui/lib/message/src/MessageProvider'
 
 export type RatesDataTableItem = {
   currency: string;
@@ -12,7 +13,7 @@ export type NavigationMenuOption = {
 export type ConversionQuery = {
   from: string;
   to: string;
-  amount: number | undefined;
+  amount: number;
 }
 
 export type ConversionResult = {
@@ -27,8 +28,8 @@ export type ConversionResult = {
 }
 
 export declare namespace CurrencyApi {
-  interface I_Service_Instance {
-    apiKey: string;
+  interface IServiceInstance {
+    axiosInstance: AxiosInstance;
     convert: (conversionQuery: CurrencyApi.Request.ConvertQueryParam) => Promise<CurrencyApi.Response.Conversion>;
     getSymbols: () => Promise<CurrencyApi.Response.Symbols>;
     getRecentExchangeRatesByCurrency: (currencyCode: string) => Promise<CurrencyApi.Response.Rates>;
@@ -71,4 +72,8 @@ export declare namespace CurrencyApi {
       timestamp: number;
     }
   }
+}
+
+export type WindowWithMessage = Window & globalThis & {
+  $message: MessageApiInjection
 }

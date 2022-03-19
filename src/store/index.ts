@@ -1,5 +1,6 @@
 import CurrencyService from '@/services/CurrencyService'
-import { ConversionQuery, ConversionResult } from '@/typings'
+import { ConversionQuery, ConversionResult, CurrencyApi } from '@/typings'
+import { mapConversionResponseToConversionResult } from '@/utils/formatter'
 import { createStore } from 'vuex'
 const CurrencyServiceInstance = new CurrencyService()
 
@@ -44,31 +45,15 @@ export default createStore<CurrencyState>({
     }
   },
   actions: {
-    getSymbols ({ commit }) {
+    getSymbols ({ commit }): Promise<void> {
       return CurrencyServiceInstance.getSymbols().then(({ symbols }) => commit('SET_SYMBOLS', symbols))
     },
-    getRatesByCurrency ({ commit }, currency) {
+    getRatesByCurrency ({ commit }, currency): Promise<void> {
       return CurrencyServiceInstance.getRecentExchangeRatesByCurrency(currency).then(({ rates }) => commit('SET_RATES', rates))
     },
-    convertByConversionQuery ({ commit, state }, converterFormData) {
+    convertByConversionQuery ({ commit, state }, converterFormData): Promise<void> {
       commit('SET_CONVERSION_QUERY', converterFormData)
-      return CurrencyServiceInstance.convert(state.conversionQuery).then(conversion => commit('SET_CONVERSION_RESULT', {
-        baseAmount: conversion.query.amount.toString(),
-        baseCurrencyCode: conversion.query.from,
-        baseCurrency: state.symbols[conversion.query.from],
-        targetAmount: conversion.result.toString(),
-        targetCurrencyCode: conversion.query.to,
-        targetCurrency: state.symbols[conversion.query.to],
-        rate: conversion.info.rate,
-        updatedOn: new Date(conversion.info.timestamp).toLocaleDateString('en-US', {
-          weekday: 'long',
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-          timeZone: 'UTC',
-          timeZoneName: 'short'
-        })
-      } as ConversionResult))
+      return CurrencyServiceInstance.convert(state.conversionQuery).then((conversion: CurrencyApi.Response.Conversion) => commit('SET_CONVERSION_RESULT', <ConversionResult>mapConversionResponseToConversionResult(conversion, state.symbols)))
     }
   }
 })

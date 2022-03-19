@@ -1,52 +1,29 @@
+import { API_ENDPOINTS } from '@/utils/constants'
 import { ConversionQuery, CurrencyApi } from '@/typings'
+import axios, { AxiosInstance } from 'axios'
 
-export default class CurrencyService implements CurrencyApi.I_Service_Instance {
-  apiKey: string;
+export default class CurrencyService implements CurrencyApi.IServiceInstance {
+  axiosInstance: AxiosInstance;
 
   constructor () {
-    this.apiKey = ''
-  }
-
-  convert (conversionQuery: ConversionQuery) {
-    return Promise.resolve({
-      date: '2021-03-15',
-      info: {
-        rate: 0.837805,
-        timestamp: 1615786266
-      },
-      query: {
-        amount: 750,
-        from: 'USD',
-        to: 'EUR'
-      },
-      result: 628.35375,
-      success: true
-    })
-  }
-
-  getSymbols () {
-    return Promise.resolve({
-      symbols: {
-        USD: 'United States Dollar',
-        EUR: 'Euro',
-        AED: 'United Arab Emirates Dirham',
-        AFN: 'Afghan Afghani',
-        ALL: 'Albanian Lek',
-        AMD: 'Armenian Dram'
+    this.axiosInstance = axios.create({
+      baseURL: process.env.VUE_APP_API_BASE_URL,
+      headers: {
+        'x-rapidapi-host': process.env.VUE_APP_API_HOST,
+        'x-rapidapi-key': process.env.VUE_APP_API_KEY
       }
     })
   }
 
+  convert (conversionQuery: ConversionQuery) {
+    return this.axiosInstance.get(API_ENDPOINTS.CONVERT, { params: conversionQuery }).then(({ data }) => data as CurrencyApi.Response.Conversion)
+  }
+
+  getSymbols () {
+    return this.axiosInstance.get(API_ENDPOINTS.SYMBOLS).then(({ data }) => data as CurrencyApi.Response.Symbols)
+  }
+
   getRecentExchangeRatesByCurrency (currencyCode: string) {
-    return Promise.resolve({
-      base: 'USD',
-      date: '2021-03-02',
-      rates: {
-        EUR: 0.831885,
-        GBP: 0.720615
-      },
-      success: true,
-      timestamp: 1614664926
-    })
+    return this.axiosInstance.get(API_ENDPOINTS.RATES, { params: { from: currencyCode } }).then(({ data }) => data as CurrencyApi.Response.Rates)
   }
 }
