@@ -73,7 +73,3 @@ export declare namespace CurrencyApi {
     }
   }
 }
-
-export type WindowWithMessage = Window & globalThis & {
-  $message: MessageApiInjection
-}

@@ -9,8 +9,8 @@ const defaultOptions: any = {
   props: {
     selectedItem: 'test',
     menu: [{
-        name: 'test',
-        label: 'Test menu item'
+      name: 'test',
+      label: 'Test menu item'
     }]
   }
 }
@@ -27,7 +27,7 @@ describe('NavigationMenu.vue', () => {
     it('custom event @update:value should be handled correct', () => {
       const wrapper = shallowMount(NavigationMenu, defaultOptions)
 
-      const updatedData = 'New test value';
+      const updatedData = 'New test value'
       const navTabElement = wrapper.findComponent(NTabs)
       navTabElement.vm.$emit('update:value', updatedData)
 
