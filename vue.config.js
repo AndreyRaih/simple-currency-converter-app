@@ -11,6 +11,9 @@ module.exports = defineConfig({
   pwa: {
     name: 'Simple Convert App',
     themeColor: '#18a058',
-    workboxPluginMode: 'GenerateSW'
+    workboxPluginMode: 'GenerateSW',
+    workboxOptions: {
+      exclude: [/_redirects/]
+    }
   }
 })
