@@ -15,9 +15,9 @@ export default createStore<CurrencyState>({
   state: {
     symbols: {},
     conversionQuery: {
-      from: 'AED',
-      to: 'AFN',
-      amount: 5
+      from: 'USD',
+      to: 'EUR',
+      amount: 1
     },
     conversionResult: null,
     rates: {}
