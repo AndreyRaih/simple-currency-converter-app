@@ -1,5 +1,6 @@
 <template>
   <n-data-table
+    :class="$style.Table"
     :columns="columns"
     :data="list"
     :pagination="pagination"
@@ -7,6 +8,14 @@
     :single-line="false"
   />
 </template>
+
+<style lang="less" module>
+.Table {
+  :global .n-pagination {
+    overflow-x: auto;
+  }
+}
+</style>
 
 <script lang="ts">
 import { defineComponent, PropType, computed, reactive } from 'vue'
