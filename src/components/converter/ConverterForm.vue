@@ -22,7 +22,7 @@ import type { SelectOption } from 'naive-ui'
 import type { ConversionResult, ConversionQuery } from '@/typings.d'
 
 export default defineComponent({
-  name: 'ConverterView',
+  name: 'ConverterForm',
   components: {
     ConverterControlls,
     ConverterResult,

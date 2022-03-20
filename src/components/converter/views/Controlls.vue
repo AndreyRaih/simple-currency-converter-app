@@ -6,7 +6,11 @@
         :value="amount"
         placeholder="Enter amount"
         @update:value="(value) => $emit('update:amount', value as number)"
-      />
+      >
+        <template #prefix>
+          <n-text :depth="3">{{current}} - {{target}}</n-text>
+        </template>
+      </n-input-number>
     </n-form-item>
 
     <currency-select
@@ -93,19 +97,20 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import { NFormItem, NInputNumber, NButton, NIcon } from 'naive-ui'
+import { NFormItem, NInputNumber, NButton, NIcon, NText } from 'naive-ui'
 import { ArrowsHorizontal as ReplaceIcon } from '@vicons/carbon'
 import type { SelectOption } from 'naive-ui'
 import CurrencySelect, { currencyFieldLabelStyle } from '@/components/shared/CurrencySelect.vue'
 
 export default defineComponent({
-  name: 'ConverterAmountForm',
+  name: 'ConverterFormControlls',
   components: {
     NFormItem,
     NInputNumber,
     CurrencySelect,
     NButton,
     NIcon,
+    NText,
     ReplaceIcon
   },
   props: {

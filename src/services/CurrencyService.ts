@@ -24,6 +24,6 @@ export default class CurrencyService implements CurrencyApi.IServiceInstance {
   }
 
   getRecentExchangeRatesByCurrency (currencyCode: string) {
-    return this.axiosInstance.get(API_ENDPOINTS.RATES, { params: { from: currencyCode } }).then(({ data }) => data as CurrencyApi.Response.Rates)
+    return this.axiosInstance.get(API_ENDPOINTS.RATES, { params: { base: currencyCode } }).then(({ data }) => data as CurrencyApi.Response.Rates)
   }
 }

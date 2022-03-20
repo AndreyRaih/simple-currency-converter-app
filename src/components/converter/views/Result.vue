@@ -12,7 +12,7 @@ import { NText, NP, NH2 } from 'naive-ui'
 import type { ConversionResult } from '@/typings.d'
 
 export default defineComponent({
-  name: 'ConverterAmountResult',
+  name: 'ConverterFormResult',
   props: {
     data: {
       required: true,

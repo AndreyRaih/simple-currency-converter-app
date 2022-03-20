@@ -14,7 +14,7 @@ import { NDataTable } from 'naive-ui'
 import type { RatesDataTableItem } from '@/typings.d'
 
 export default defineComponent({
-  name: 'CurrencyRatesTable',
+  name: 'CurrenciesListRatesTable',
   components: {
     NDataTable
   },
