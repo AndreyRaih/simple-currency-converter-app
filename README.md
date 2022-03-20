@@ -21,6 +21,7 @@ Apart of that, there were few additional requirements:
 The project powered by:
 - [Vue 3](https://vuejs.org/) and [Vue-CLI 5](https://cli.vuejs.org/), [Vuex](https://vuex.vuejs.org/guide/) and [Vue-Router](https://router.vuejs.org/)
 - Supported [TypeScript](https://vuejs.org/guide/typescript/overview.html) and [PWA abilities](https://cli.vuejs.org/core-plugins/pwa.html#vue-cli-plugin-pwa)
+- UI provided by amazing [Naive UI](https://www.naiveui.com/en-US/os-theme), there are a lot of minimalistic, well-typed and light-weight components, which also support treeshaking, so it mean, that in result bundle there will only used components
 - As financial api had been choosen [Principal API from Rapid API](https://rapidapi.com/principalapis/api/currency-conversion-and-exchange-rates/)
 
 **Notes about project structure:**
