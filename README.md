@@ -46,14 +46,14 @@ There are supported `development` and `production` modes.
 - Yarn 1.22.17
 - OPTIONAL: serve 13.0.2 (for using `production` mode locally)
 
-#### PrincipalAPI usage restictions:
+#### PrincipalAPI usage preparation:
 
 Rapid API provides a lot of APIs kinds, but almost all of them has some restrictions/quotas for free subscriptions.
-The API, which I use in current project also has quota to 1000 requests/month, so if you face with any issues with access to Principal API, you will have to perform next steps:
+The API, which I use in current project also has quota to 1000 requests/month, so in order to get properly access to API, you will have to perform next steps:
 
 1. Visit and sign in or login on [Principal API page on RapidAPI](https://rapidapi.com/principalapis/api/currency-conversion-and-exchange-rates/)
 2. Get `X-RapidAPI-Host` and `X-RapidAPI-Key` values from accordingly fields
-3. Go to `.env` file from repository root level, and replace existing values by values from previous step
+3. Create `.env` file in repository root level, and add variables in accordance to snippet below
 ```
 VUE_APP_API_BASE_URL=https://currency-conversion-and-exchange-rates.p.rapidapi.com
 VUE_APP_API_HOST=[Your X-RapidAPI-Host]
