@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConverterForm.vue Rendering should renders correctly 1`] = `
+<div
+  data-v-app=""
+>
+  
+  <converter-controlls-stub
+    amount="0"
+    current="USD"
+    loading="false"
+    symbols=""
+    target="EUR"
+  />
+  <n-collapse-transition-stub
+    appear="false"
+    show="false"
+  />
+  
+</div>
+`;
+
+exports[`ConverterForm.vue Rendering should renders result section, if converterResult is not falsy or empty 1`] = `
+<div
+  data-v-app=""
+>
+  
+  <converter-controlls-stub
+    amount="0"
+    current="USD"
+    loading="false"
+    symbols=""
+    target="EUR"
+  />
+  <n-collapse-transition-stub
+    appear="false"
+    show="true"
+  />
+  
+</div>
+`;
